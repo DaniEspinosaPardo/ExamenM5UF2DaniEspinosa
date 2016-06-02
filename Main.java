@@ -13,6 +13,8 @@ import java.util.Random;
 
 public class Main {
 
+	public static final int TOTAL_ERRORS = 5;
+
 	/**
 	 * Mètode main per iniciar el programa
 	 * 
@@ -22,12 +24,14 @@ public class Main {
 	 */
 
 	public static void main(String[] args) {
+		Scanner reader = new Scanner(System.in);
+		Random rand = new Random();
 		String paraulesSecretes[] = { "hola", "programació", "casa" };
 		String paraulaATrobar = "";
 		int index;
+
 		System.out.println("Comença el joc!");
 
-		Random rand = new Random();
 		index = rand.nextInt(3);
 		for (int i = 0; i < paraulesSecretes[index].length(); i++) {
 			paraulaATrobar += "_";
@@ -35,11 +39,9 @@ public class Main {
 
 		System.out.println(paraulaATrobar);
 
-		Scanner reader = new Scanner(System.in);
-
 		int numErrors = 0;
 
-		while (!paraulaATrobar.equals(paraulesSecretes[index]) && numErrors < 5) {
+		while (!paraulaATrobar.equals(paraulesSecretes[index]) && numErrors < TOTAL_ERRORS) {
 			if (!existeixLletra(reader.next().charAt(0), paraulesSecretes, paraulaATrobar, index)) {
 				numErrors++;
 			}
@@ -52,8 +54,15 @@ public class Main {
 	 * Mètode que retorna true si la lletra introduida està en la paraula de la
 	 * variable "paraulaATrobar" i si no retorna false.
 	 * 
-	 * @param nova
+	 * @param novaLletra
 	 *            - Lletra que introdueix l'usuari
+	 * @param paraulesSecretes
+	 *            - Conjunt de paraules secretes
+	 * @param paraulaATrobar
+	 *            - Paraula que ha de trobar l'usuari
+	 * @param index
+	 *            - posició de l'array on està la paraula secreta escollida.
+	 * 
 	 * @return boolean trobada
 	 * 
 	 */
